@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Staff TU - SMK Al-Madani</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { perhotelan: '#D0EFB5', mplb: '#EB7878', pplg: '#2F3E75' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-pplg text-white px-6 py-4 flex justify-between items-center">
+        <h1 class="font-bold">Portal Tata Usaha - SMK Al-Madani Garut</h1>
+        <button onclick="logout()" class="bg-mplb text-white px-4 py-1.5 rounded text-sm font-bold">Logout</button>
+    </nav>
+
+    <div class="container mx-auto p-6 space-y-6">
+        <!-- Statistik Akun Terdaftar -->
+        <div class="bg-white p-6 rounded-xl shadow border-t-4 border-mplb">
+            <h2 class="text-xl font-bold text-pplg mb-4">Daftar Akun Pengguna Terdaftar (Database)</h2>
+            <table class="w-full text-left border">
+                <thead>
+                    <tr class="bg-gray-100 text-sm">
+                        <th class="p-2 border">ID</th>
+                        <th class="p-2 border">Nama</th>
+                        <th class="p-2 border">Email</th>
+                        <th class="p-2 border">Jurusan</th>
+                        <th class="p-2 border">Role</th>
+                    </tr>
+                </thead>
+                <tbody id="tableUsers"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="db.js"></script>
+    <script>
+        checkAccess('tu');
+
+        function loadUsers() {
+            const users = JSON.parse(localStorage.getItem('DB_USERS'));
+            const tbody = document.getElementById('tableUsers');
+            tbody.innerHTML = '';
+
+            users.forEach(u => {
+                tbody.innerHTML += `
+                    <tr class="text-sm">
+                        <td class="p-2 border">${u.id}</td>
+                        <td class="p-2 border font-bold">${u.name}</td>
+                        <td class="p-2 border">${u.email}</td>
+                        <td class="p-2 border">${u.jurusan}</td>
+                        <td class="p-2 border"><span class="bg-pplg text-white px-2 py-0.5 rounded text-xs">${u.role}</span></td>
+                    </tr>
+                `;
+            });
+        }
+        loadUsers();
+    </script>
+</body>
+</html>

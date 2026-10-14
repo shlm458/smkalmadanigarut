@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMK Al-Madani Garut</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { perhotelan: '#D0EFB5', mplb: '#EB7878', pplg: '#2F3E75' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- HEADER NAVIGATION -->
+    <header class="bg-pplg text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="showView('pageLanding')">
+                <div class="w-10 h-10 rounded-full bg-perhotelan flex items-center justify-center font-bold text-pplg">AM</div>
+                <h1 class="text-xl font-bold tracking-wide">SMK AL-MADANI GARUT</h1>
+            </div>
+            <div id="navArea">
+                <button onclick="openModal()" class="bg-mplb text-white px-5 py-2 rounded-lg font-bold hover:opacity-90">Login Portal</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. LANDING PAGE & VISI MISI -->
+    <main id="pageLanding" class="view-section">
+        <section class="bg-pplg text-white py-16 px-6 text-center">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-4xl font-extrabold mb-4">Mewujudkan Generasi Unggul & Berteknologi</h2>
+                <p class="text-lg opacity-90 mb-8">Pusat pendidikan kejuruan berstandar industri dengan 3 program keahlian unggulan di Garut.</p>
+                <button onclick="openModal()" class="bg-perhotelan text-pplg text-lg font-bold px-8 py-3 rounded-full shadow-lg">Masuk Portal Siswa / Guru / TU</button>
+            </div>
+        </section>
+
+        <!-- SEKSI VISI MISI -->
+        <section class="py-16 bg-white border-b">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <h2 class="text-3xl font-bold text-center text-pplg mb-10">Visi & Misi Sekolah</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50 p-6 rounded-2xl border-l-8 border-pplg shadow-sm">
+                        <h3 class="text-2xl font-bold text-pplg mb-3">Visi</h3>
+                        <p class="text-gray-700 leading-relaxed font-medium">
+                            "terwujudnya lulusan yang berkompeten mandiri & berakhlak mulia "
+                        </p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-2xl border-l-8 border-perhotelan shadow-sm">
+                        <h3 class="text-2xl font-bold text-pplg mb-3">Misi</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700 text-sm">
+                            <li>mengembangkan kemampuan diri sesuai dengan kompetensi yang dimiliki sehingga mampu berkompetensi secara local maupun global </li>
+                            <li>mengembangkan penyelenggaraan pendidikan yang lebih kreatif dan inovatif</li>
+                            <li>Membangun kepribadian yang sesuai dengan nilai-nilai moral,keimanan dan ketakwaan kepada Allah Swt</li>
+                            <li>Membangun kerja sama dengan dunia usaha dan dunia industri (DUDI) bereputasi.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JURUSAN -->
+        <section class="py-16 px-6 container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-pplg mb-10">Program Keahlian</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-perhotelan rounded-2xl p-6 text-pplg shadow-md">
+                    <span class="text-xs font-bold uppercase bg-white px-3 py-1 rounded-full">Hospitality</span>
+                    <h3 class="text-2xl font-bold mt-4 mb-2">Perhotelan</h3>
+                    <p class="text-sm">Menyiapkan tenaga kerja profesional dibidang pelayanan akomodasi dan manajemen perhotelan.</p>
+                </div>
+                <div class="bg-mplb text-white rounded-2xl p-6 shadow-md">
+                    <span class="text-xs font-bold uppercase bg-white text-mplb px-3 py-1 rounded-full">Management</span>
+                    <h3 class="text-2xl font-bold mt-4 mb-2">MPLB</h3>
+                    <p class="text-sm">Manajemen Perkantoran dan Layanan Bisnis. Mencetak tenaga administrasi perkantoran modern.</p>
+                </div>
+                <div class="bg-pplg text-white rounded-2xl p-6 shadow-md">
+                    <span class="text-xs font-bold uppercase bg-perhotelan text-pplg px-3 py-1 rounded-full">IT Software</span>
+                    <h3 class="text-2xl font-bold mt-4 mb-2">PPLG</h3>
+                    <p class="text-sm">Pengembangan Perangkat Lunak dan Gim. Fokus pada rekayasa perangkat lunak dan aplikasi.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 2. DASHBOARD MURID -->
+    <main id="pageMurid" class="view-section hidden container mx-auto p-6 space-y-6">
+        <div class="bg-white p-6 rounded-xl shadow border-l-8 border-pplg flex justify-between items-center">
+            <div>
+                <h2 id="studentName" class="text-2xl font-bold text-pplg">Nama Siswa</h2>
+                <p id="studentDetail" class="text-sm text-gray-500">Jurusan: - | Email: -</p>
+            </div>
+            <span class="bg-perhotelan text-pplg px-4 py-2 rounded-full font-bold text-sm">Status: Siswa Aktif</span>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow border-l-8 border-perhotelan">
+            <h3 class="text-xl font-bold text-pplg mb-2">Presensi / Absensi Harian</h3>
+            <p class="text-sm text-gray-600 mb-4">Klik status kehadiran Anda hari ini:</p>
+            <div class="flex gap-3">
+                <button onclick="submitAbsensi('Hadir')" class="bg-perhotelan text-pplg font-bold px-6 py-2 rounded-lg">Hadir</button>
+                <button onclick="submitAbsensi('Izin')" class="bg-yellow-200 text-yellow-800 font-bold px-6 py-2 rounded-lg">Izin</button>
+                <button onclick="submitAbsensi('Sakit')" class="bg-mplb text-white font-bold px-6 py-2 rounded-lg">Sakit</button>
+            </div>
+            <p id="absenMsg" class="mt-3 text-sm font-bold text-green-700"></p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow border-l-8 border-mplb">
+            <h3 class="text-xl font-bold text-pplg mb-4">Kuis Online Tersedia</h3>
+            <div id="quizList" class="space-y-4"></div>
+        </div>
+    </main>
+
+    <!-- 3. DASHBOARD GURU -->
+    <main id="pageGuru" class="view-section hidden container mx-auto p-6 space-y-6">
+        <div class="bg-white p-6 rounded-xl shadow border-t-4 border-pplg">
+            <h2 class="text-xl font-bold text-pplg mb-4">Buat Pertanyaan Kuis Baru</h2>
+            <form id="formKuis" class="space-y-3">
+                <div>
+                    <label class="text-sm font-bold">Pertanyaan / Soal</label>
+                    <input type="text" id="soalKuis" required class="w-full border p-2 rounded mt-1" placeholder="Masukkan soal kuis">
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <input type="text" id="opt0" required placeholder="Pilihan A" class="border p-2 rounded">
+                    <input type="text" id="opt1" required placeholder="Pilihan B" class="border p-2 rounded">
+                    <input type="text" id="opt2" required placeholder="Pilihan C" class="border p-2 rounded">
+                </div>
+                <div>
+                    <label class="text-sm font-bold">Jawaban Benar</label>
+                    <select id="jawabanBenar" class="w-full border p-2 rounded mt-1 bg-white">
+                        <option value="0">Pilihan A</option>
+                        <option value="1">Pilihan B</option>
+                        <option value="2">Pilihan C</option>
+                    </select>
+                </div>
+                <button type="submit" class="bg-pplg text-white px-6 py-2 rounded-lg font-bold">Terbitkan Kuis</button>
+            </form>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow border-t-4 border-perhotelan">
+            <h2 class="text-xl font-bold text-pplg mb-4">Rekapitulasi Absensi Siswa</h2>
+            <table class="w-full text-left border">
+                <thead>
+                    <tr class="bg-gray-100 text-sm">
+                        <th class="p-2 border">Nama</th>
+                        <th class="p-2 border">Jurusan</th>
+                        <th class="p-2 border">Status</th>
+                        <th class="p-2 border">Waktu</th>
+                    </tr>
+                </thead>
+                <tbody id="tableAbsen"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- 4. DASHBOARD TU -->
+    <main id="pageTU" class="view-section hidden container mx-auto p-6 space-y-6">
+        <div class="bg-white p-6 rounded-xl shadow border-t-4 border-mplb">
+            <h2 class="text-xl font-bold text-pplg mb-4">Daftar Akun Pengguna Terdaftar (Database)</h2>
+            <table class="w-full text-left border">
+                <thead>
+                    <tr class="bg-gray-100 text-sm">
+                        <th class="p-2 border">ID</th>
+                        <th class="p-2 border">Nama</th>
+                        <th class="p-2 border">Email</th>
+                        <th class="p-2 border">Jurusan</th>
+                        <th class="p-2 border">Role</th>
+                    </tr>
+                </thead>
+                <tbody id="tableUsers"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- MODAL LOGIN -->
+    <div id="loginModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-500 text-xl font-bold">&times;</button>
+            <h3 class="text-2xl font-bold text-pplg mb-1">Login / Auto Create</h3>
+            <p class="text-xs text-gray-500 mb-4">*Akun otomatis dibuat jika email belum terdaftar.</p>
+
+            <form id="authForm" class="space-y-3">
+                <div>
+                    <label class="text-xs font-bold text-gray-600">Nama Lengkap (Khusus Akun Baru)</label>
+                    <input type="text" id="inputName" placeholder="Nama Anda" class="w-full border p-2 rounded mt-1">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600">Email</label>
+                    <input type="email" id="inputEmail" required placeholder="user@almadani.sch.id" class="w-full border p-2 rounded mt-1">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600">Password</label>
+                    <input type="password" id="inputPassword" required placeholder="••••••••" class="w-full border p-2 rounded mt-1">
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600">Jurusan</label>
+                    <select id="inputJurusan" class="w-full border p-2 rounded mt-1 bg-white">
+                        <option value="PPLG">PPLG</option>
+                        <option value="MPLB">MPLB</option>
+                        <option value="Perhotelan">Perhotelan</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="text-xs font-bold text-gray-600">Login Sebagai (Role)</label>
+                    <select id="inputRole" class="w-full border p-2 rounded mt-1 bg-white">
+                        <option value="murid">Murid / Siswa</option>
+                        <option value="guru">Guru / Pengajar</option>
+                        <option value="tu">Staff Tata Usaha (TU)</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-pplg text-white py-3 rounded-lg font-bold mt-2 hover:opacity-90">Masuk Portal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT -->
+    <script>
+        let currentUser = null;
+
+        function initDatabase() {
+            if (!localStorage.getItem('DB_USERS')) {
+                const defaultUsers = [
+                    { id: 1, email: "murid@almadani.sch.id", pass: "123", name: "Ahmad Subagja", role: "murid", jurusan: "PPLG" },
+                    { id: 2, email: "guru@almadani.sch.id", pass: "123", name: "Pak Budi, S.Kom", role: "guru", jurusan: "PPLG" },
+                    { id: 3, email: "tu@almadani.sch.id", pass: "123", name: "Ibu Ani", role: "tu", jurusan: "Umum" }
+                ];
+                localStorage.setItem('DB_USERS', JSON.stringify(defaultUsers));
+            }
+            if (!localStorage.getItem('DB_ABSENSI')) localStorage.setItem('DB_ABSENSI', JSON.stringify([]));
+            if (!localStorage.getItem('DB_KUIS')) {
+                const defaultKuis = [{ id: 1, jurusan: "PPLG", soal: "Apa kepanjangan dari PPLG?", opsi: ["Pengembangan Perangkat Lunak & Gim", "Pusat Pelatihan Lokasi Gedung", "Program Pemrograman Lokal"], jawaban: 0 }];
+                localStorage.setItem('DB_KUIS', JSON.stringify(defaultKuis));
+            }
+        }
+        initDatabase();
+
+        function openModal() { document.getElementById('loginModal').classList.remove('hidden'); document.getElementById('loginModal').classList.add('flex'); }
+        function closeModal() { document.getElementById('loginModal').classList.add('hidden'); }
+
+        function showView(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(viewId).classList.remove('hidden');
+
+            const navArea = document.getElementById('navArea');
+            if (currentUser) {
+                navArea.innerHTML = `<span class="text-sm font-bold mr-3">Halo, ${currentUser.name} (${currentUser.role.toUpperCase()})</span>
+                <button onclick="userLogout()" class="bg-mplb text-white px-4 py-1.5 rounded text-sm font-bold">Logout</button>`;
+            } else {
+                navArea.innerHTML = `<button onclick="openModal()" class="bg-mplb text-white px-5 py-2 rounded-lg font-bold hover:opacity-90">Login Portal</button>`;
+            }
+        }
+
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('inputEmail').value;
+            const pass = document.getElementById('inputPassword').value;
+            const name = document.getElementById('inputName').value;
+            const role = document.getElementById('inputRole').value;
+            const jurusan = document.getElementById('inputJurusan').value;
+
+            let users = JSON.parse(localStorage.getItem('DB_USERS')) || [];
+            let foundUser = users.find(u => u.email.toLowerCase() === email.toLowerCase());
+
+            if (foundUser) {
+                if (foundUser.pass === pass) {
+                    currentUser = foundUser;
+                } else {
+                    return alert("Password salah!");
+                }
+            } else {
+                currentUser = { id: Date.now(), email, pass, name: name || email.split('@')[0], role, jurusan };
+                users.push(currentUser);
+                localStorage.setItem('DB_USERS', JSON.stringify(users));
+            }
+
+            closeModal();
+            loadDashboard();
+        });
+
+        function loadDashboard() {
+            if (currentUser.role === 'murid') {
+                document.getElementById('studentName').innerText = currentUser.name;
+                document.getElementById('studentDetail').innerText = `Jurusan: ${currentUser.jurusan} | Email: ${currentUser.email}`;
+                renderKuis();
+                showView('pageMurid');
+            } else if (currentUser.role === 'guru') {
+                loadAbsensi();
+                showView('pageGuru');
+            } else if (currentUser.role === 'tu') {
+                loadUsers();
+                showView('pageTU');
+            }
+        }
+
+        function userLogout() {
+            currentUser = null;
+            showView('pageLanding');
+        }
+
+        function submitAbsensi(status) {
+            let listAbsen = JSON.parse(localStorage.getItem('DB_ABSENSI'));
+            listAbsen.push({ nama: currentUser.name, email: currentUser.email, jurusan: currentUser.jurusan, status, waktu: new Date().toLocaleString() });
+            localStorage.setItem('DB_ABSENSI', JSON.stringify(listAbsen));
+            document.getElementById('absenMsg').innerText = `[Tersimpan] Anda mengisi presensi: ${status}`;
+        }
+
+        function renderKuis() {
+            const listKuis = JSON.parse(localStorage.getItem('DB_KUIS'));
+            const container = document.getElementById('quizList');
+            container.innerHTML = '';
+            listKuis.forEach((q, idx) => {
+                let optionsHtml = '';
+                q.opsi.forEach((opt, optIdx) => {
+                    optionsHtml += `<label class="block text-sm"><input type="radio" name="quiz_${q.id}" value="${optIdx}"> ${opt}</label>`;
+                });
+                container.innerHTML += `
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <p class="font-bold text-pplg mb-2">${idx+1}. ${q.soal}</p>
+                        <div class="space-y-1 mb-3">${optionsHtml}</div>
+                        <button onclick="checkAnswer(${q.id}, ${q.jawaban})" class="bg-pplg text-white px-4 py-1.5 rounded text-sm font-bold">Kirim Jawaban</button>
+                    </div>`;
+            });
+        }
+
+        function checkAnswer(quizId, jawabanBenar) {
+            const selected = document.querySelector(`input[name="quiz_${quizId}"]:checked`);
+            if(!selected) return alert('Pilih jawaban terlebih dahulu!');
+            alert(parseInt(selected.value) === jawabanBenar ? 'Selamat! Jawaban Anda BENAR' : 'Jawaban SALAH. Silakan coba lagi!');
+        }
+
+        function loadAbsensi() {
+            const listAbsen = JSON.parse(localStorage.getItem('DB_ABSENSI'));
+            const tbody = document.getElementById('tableAbsen');
+            tbody.innerHTML = '';
+            listAbsen.forEach(a => {
+                tbody.innerHTML += `<tr class="text-sm"><td class="p-2 border font-bold">${a.nama}</td><td class="p-2 border">${a.jurusan}</td><td class="p-2 border"><span class="bg-perhotelan px-2 py-0.5 rounded font-bold">${a.status}</span></td><td class="p-2 border text-xs text-gray-500">${a.waktu}</td></tr>`;
+            });
+        }
+
+        document.getElementById('formKuis').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const listKuis = JSON.parse(localStorage.getItem('DB_KUIS'));
+            listKuis.push({
+                id: Date.now(), jurusan: "PPLG",
+                soal: document.getElementById('soalKuis').value,
+                opsi: [document.getElementById('opt0').value, document.getElementById('opt1').value, document.getElementById('opt2').value],
+                jawaban: parseInt(document.getElementById('jawabanBenar').value)
+            });
+            localStorage.setItem('DB_KUIS', JSON.stringify(listKuis));
+            alert('Kuis berhasil ditambahkan!');
+            this.reset();
+        });
+
+        function loadUsers() {
+            const users = JSON.parse(localStorage.getItem('DB_USERS'));
+            const tbody = document.getElementById('tableUsers');
+            tbody.innerHTML = '';
+            users.forEach(u => {
+                tbody.innerHTML += `<tr class="text-sm"><td class="p-2 border">${u.id}</td><td class="p-2 border font-bold">${u.name}</td><td class="p-2 border">${u.email}</td><td class="p-2 border">${u.jurusan}</td><td class="p-2 border"><span class="bg-pplg text-white px-2 py-0.5 rounded text-xs">${u.role}</span></td></tr>`;
+            });
+        }
+    </script>
+</body>
+</html>

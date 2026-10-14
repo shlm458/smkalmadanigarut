@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Guru - SMK Al-Madani</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { perhotelan: '#D0EFB5', mplb: '#EB7878', pplg: '#2F3E75' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <nav class="bg-pplg text-white px-6 py-4 flex justify-between items-center">
+        <h1 class="font-bold">Portal Guru - SMK Al-Madani Garut</h1>
+        <button onclick="logout()" class="bg-mplb text-white px-4 py-1.5 rounded text-sm font-bold">Logout</button>
+    </nav>
+
+    <div class="container mx-auto p-6 space-y-6">
+        <!-- FITUR 1: BUAT KUIS BARU -->
+        <div class="bg-white p-6 rounded-xl shadow border-t-4 border-pplg">
+            <h2 class="text-xl font-bold text-pplg mb-4">Buat Pertanyaan Kuis Baru</h2>
+            <form id="formKuis" class="space-y-3">
+                <div>
+                    <label class="text-sm font-bold">Pertanyaan / Soal</label>
+                    <input type="text" id="soalKuis" required class="w-full border p-2 rounded mt-1" placeholder="Masukkan soal kuis">
+                </div>
+                <div class="grid grid-cols-3 gap-2">
+                    <input type="text" id="opt0" required placeholder="Pilihan A" class="border p-2 rounded">
+                    <input type="text" id="opt1" required placeholder="Pilihan B" class="border p-2 rounded">
+                    <input type="text" id="opt2" required placeholder="Pilihan C" class="border p-2 rounded">
+                </div>
+                <div>
+                    <label class="text-sm font-bold">Jawaban Benar</label>
+                    <select id="jawabanBenar" class="w-full border p-2 rounded mt-1 bg-white">
+                        <option value="0">Pilihan A</option>
+                        <option value="1">Pilihan B</option>
+                        <option value="2">Pilihan C</option>
+                    </select>
+                </div>
+                <button type="submit" class="bg-pplg text-white px-6 py-2 rounded-lg font-bold">Terbitkan Kuis</button>
+            </form>
+        </div>
+
+        <!-- FITUR 2: REKAP ABSENSI -->
+        <div class="bg-white p-6 rounded-xl shadow border-t-4 border-perhotelan">
+            <h2 class="text-xl font-bold text-pplg mb-4">Rekapitulasi Absensi Siswa</h2>
+            <table class="w-full text-left border">
+                <thead>
+                    <tr class="bg-gray-100 text-sm">
+                        <th class="p-2 border">Nama</th>
+                        <th class="p-2 border">Jurusan</th>
+                        <th class="p-2 border">Status</th>
+                        <th class="p-2 border">Waktu</th>
+                    </tr>
+                </thead>
+                <tbody id="tableAbsen"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="db.js"></script>
+    <script>
+        checkAccess('guru');
+
+        // Render Absensi
+        function loadAbsensi() {
+            const listAbsen = JSON.parse(localStorage.getItem('DB_ABSENSI'));
+            const tbody = document.getElementById('tableAbsen');
+            tbody.innerHTML = '';
+
+            listAbsen.forEach(a => {
+                tbody.innerHTML += `
+                    <tr class="text-sm">
+                        <td class="p-2 border font-bold">${a.nama}</td>
+                        <td class="p-2 border">${a.jurusan}</td>
+                        <td class="p-2 border"><span class="bg-perhotelan px-2 py-0.5 rounded font-bold">${a.status}</span></td>
+                        <td class="p-2 border text-xs text-gray-500">${a.waktu}</td>
+                    </tr>
+                `;
+            });
+        }
+        loadAbsensi();
+
+        // Tambah Kuis
+        document.getElementById('formKuis').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const listKuis = JSON.parse(localStorage.getItem('DB_KUIS'));
+            
+            const newQuiz = {
+                id: Date.now(),
+                jurusan: "PPLG",
+                soal: document.getElementById('soalKuis').value,
+                opsi: [
+                    document.getElementById('opt0').value,
+                    document.getElementById('opt1').value,
+                    document.getElementById('opt2').value
+                ],
+                jawaban: parseInt(document.getElementById('jawabanBenar').value)
+            };
+
+            listKuis.push(newQuiz);
+            localStorage.setItem('DB_KUIS', JSON.stringify(listKuis));
+            alert('Kuis berhasil ditambahkan!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
